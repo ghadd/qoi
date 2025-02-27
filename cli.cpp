@@ -29,8 +29,8 @@ struct Config {
     bool loop;
     std::string sort_order;
     bool ffplay;
-    int gif_width;
-    int gif_height;
+    int width;
+    int height;
 };
 
 Config parse_config(const std::string& path) {
@@ -46,8 +46,8 @@ Config parse_config(const std::string& path) {
         node["loop"].get_value<bool>(),
         node["sort_order"].get_value<std::string>(),
         node["ffplay"].get_value<bool>(),
-        node["gif_width"].get_value<int>(),
-        node["gif_height"].get_value<int>()
+        node["width"].get_value<int>(),
+        node["height"].get_value<int>()
     };
 }
 
@@ -90,7 +90,7 @@ uint8_t* resize_frame(const void* data, int original_width, int original_height,
 
 void create_gif(const Config& config, const std::vector<fs::path>& files) {
     GifWriter gif;
-    if (!GifBegin(&gif, config.output_gif.c_str(), config.gif_width, config.gif_height, config.frame_delay, config.loop)) {
+    if (!GifBegin(&gif, config.output_gif.c_str(), config.width, config.height, config.frame_delay, config.loop)) {
         std::cerr << "Failed to create GIF" << std::endl;
         return;
     }
@@ -106,10 +106,10 @@ void create_gif(const Config& config, const std::vector<fs::path>& files) {
         }
 
         // Resize frame to fit the GIF dimensions
-        uint8_t* resized_data = resize_frame(data, desc.width, desc.height, config.gif_width, config.gif_height);
+        uint8_t* resized_data = resize_frame(data, desc.width, desc.height, config.width, config.height);
         if (resized_data) {
             // Write resized frame to GIF
-            if (!GifWriteFrame(&gif, resized_data, config.gif_width, config.gif_height, config.frame_delay, 8, true)) {
+            if (!GifWriteFrame(&gif, resized_data, config.width, config.height, config.frame_delay, 8, true)) {
                 std::cerr << "Failed to write frame" << std::endl;
                 break;
             }
@@ -171,8 +171,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Loop: " << config.loop << std::endl;
     std::cout << "Sort order: " << config.sort_order << std::endl;
     std::cout << "ffplay: " << config.ffplay << std::endl;
-    std::cout << "GIF Width: " << config.gif_width << std::endl;
-    std::cout << "GIF Height: " << config.gif_height << std::endl;
+    std::cout << "GIF Width: " << config.width << std::endl;
+    std::cout << "GIF Height: " << config.height << std::endl;
 
     std::vector<fs::path> files = get_qoi_files(config.input_folder, config.sort_order);
     std::cout << "Found " << files.size() << " QOI images in " << config.input_folder << std::endl;
