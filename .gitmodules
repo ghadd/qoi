@@ -1,0 +1,12 @@
+[submodule "waf"]
+	path = waf
+	url = git@github.com:ArduPilot/waf.git
+[submodule "stb"]
+	path = stb
+	url = git@github.com:nothings/stb.git
+[submodule "gif-writer"]
+	path = gif-writer
+	url = git@github.com:charlietangora/gif-h.git
+[submodule "fkYAML"]
+	path = fkYAML
+	url = git@github.com:fktn-k/fkYAML.git

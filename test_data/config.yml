@@ -1,0 +1,8 @@
+input_folder: "C:/Users/daniil.o.timachov/ws/ghadd/qoi/test_data/1"
+output_gif: "C:/Users/daniil.o.timachov/ws/ghadd/qoi/test_data/1/output.gif"
+frame_delay: 100
+loop: true
+sort_order: "name"
+ffplay: true
+gif_width: 640
+gif_height: 640

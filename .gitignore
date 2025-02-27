@@ -3,3 +3,7 @@ stb_image.h
 stb_image_write.h
 qoibench
 qoiconv
+
+build/
+.vscode
+.lock-waf_win32_build
