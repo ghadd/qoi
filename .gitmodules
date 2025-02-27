@@ -1,6 +1,6 @@
 [submodule "waf"]
 	path = waf
-	url = git@github.com:ArduPilot/waf.git
+	url = https://github.com/ArduPilot/waf
 [submodule "stb"]
 	path = stb
 	url = git@github.com:nothings/stb.git
